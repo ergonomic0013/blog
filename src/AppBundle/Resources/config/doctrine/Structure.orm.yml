@@ -1,0 +1,28 @@
+AppBundle\Entity\Structure:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\StructureRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        position:
+            type: string
+            length: 255
+        dateEnter:
+            type: date
+            column: date_enter
+        salary:
+            type: bigint
+        parentId:
+            type: bigint
+            column: parent_id
+        depth:
+            type: integer
+    lifecycleCallbacks: {  }

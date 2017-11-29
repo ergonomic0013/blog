@@ -1,0 +1,13 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+blog:
+    resource: '@AppBundle/Resources/config/routing.yml'
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc

@@ -1,0 +1,18 @@
+show:
+    path:     /show
+    defaults: { _controller: AppBundle:Structure:show }
+register:
+    path:     /register
+    defaults: { _controller: AppBundle:User:register }
+
+profile:
+    path:     /profile
+    defaults: { _controller: AppBundle:User:profile }
+
+edit:
+    path:     /edit
+    defaults: { _controller: AppBundle:User:edit }
+
+delete:
+    path:     /delete
+    defaults: { _controller: AppBundle:User:delete }
