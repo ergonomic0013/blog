@@ -1,13 +1,12 @@
-show:
-    path:     /show
-    defaults: { _controller: AppBundle:Structure:show }
 register:
     path:     /register
     defaults: { _controller: AppBundle:User:register }
 
+
 profile:
-    path:     /profile
+    path:     /profile/{id}
     defaults: { _controller: AppBundle:User:profile }
+    methods:    [GET]
 
 edit:
     path:     /edit

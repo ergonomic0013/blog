@@ -13,11 +13,50 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class StructureController extends Controller
 {
+		public $currentPath = '/a/b/c/d';
+
+		public function _construct($path){
+			$this->currentPath = $path;
+		}
+
+		public function cddAction($newPath){
+			$currentPath = substr($this->currentPath, 1);
+			$dir = null;
+			$i = 0;
+			$a = explode('/', $newPath);
+			$b = explode('/', $currentPath);
+			
+			foreach ($a as $key) {
+				if($key == '..'){
+					$i++;
+				}
+			}
+
+			$c = array_splice($b, -$i, $i, array_slice($a, $i));
+			
+			foreach ($b as $q) {
+				$dir .= '/'.$q;
+			}
+		
+			$currentPath = $dir;
+
+
+			return $currentPath;
+		}
+
+
+		public function cdAction($newPath){
+			$path = new StructureController();
+			echo $path->cddAction('../../x/y')->currentPath;
+		}
+
+
+
 		public function showAction()
 		{
 			 $em = $this->getDoctrine()->getManager();
 			 $workers = $this->getDoctrine()->getRepository(Structure::class)->findAll();
-				
+			
 				//print_r($workers[0]->id);         echo $workers[0]->getId();
 				//print_r($workers[0]);
 				// foreach ($workers as $w) {

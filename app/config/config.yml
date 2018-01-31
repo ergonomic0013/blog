@@ -78,6 +78,13 @@ fos_user:
     from_email:
         address: ergonomic@ukr.net
         sender_name: Misha
+    use_listener: false
+    service:
+        mailer:                 fos_user.mailer.default
+        email_canonicalizer:    fos_user.util.canonicalizer.default
+        username_canonicalizer: fos_user.util.canonicalizer.default
+        token_generator:        fos_user.util.token_generator.default
+        user_manager:           fos_user.user_manager.default
 
 knp_paginator:
     page_range:                 5          # default page range used in pagination control
@@ -94,6 +101,8 @@ nelmio_api_doc: ~
 
 fos_rest:
     body_listener: true
+    serializer:
+        serialize_null: true
     format_listener:
         rules:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: false }
@@ -102,3 +111,22 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
+
+jms_serializer:
+    property_naming:
+        separator:  _
+        lower_case: true
+
+    metadata:
+        cache: file
+        debug: "%kernel.debug%"
+        file_cache:
+            dir: "%kernel.cache_dir%/serializer"
+        auto_detection: true
+        directories:
+            FOSUserBundle:
+                namespace_prefix: FOS\UserBundle
+                path: %kernel.root_dir%/config/serializer/FosUserBundle
+            AppBundle:
+                namespace_prefix: AppBundle
+                path: %kernel.root_dir%/config/serializer/AppBundle

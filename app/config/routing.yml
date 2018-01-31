@@ -4,10 +4,12 @@ app:
 
 blog:
     resource: '@AppBundle/Resources/config/routing.yml'
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
+    prefix: /api/
+    
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
+
+path:
+    path: /cd/{newPath}
+    defaults: { _controller: AppBundle:Structure:cd }
