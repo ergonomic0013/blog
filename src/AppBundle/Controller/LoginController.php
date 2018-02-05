@@ -30,9 +30,9 @@ class LoginController extends FOSRestController
     	}
 
     	$token = $this->getToken($user);
-    	$response
-
-
+    	$response = new Response($this->serialize(['token' => $token]), Response::HTTP_OK);
+    	
+    	return $this->setBaseHeaders($response);
     }
 
     public function getToken()
