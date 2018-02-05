@@ -31,19 +31,25 @@ class LoginController extends FOSRestController
 
     	$token = $this->getToken($user);
     	$response = new Response($this->serialize(['token' => $token]), Response::HTTP_OK);
-    	
+
     	return $this->setBaseHeaders($response);
     }
 
-    public function getToken()
-    {
-
-
-    }
-
-    public function getTokenExpiryDateTime()
-    {
-
-
-    }
+    public function getToken(User $user)
+	{
+    return $this->container->get('lexik_jwt_authentication.encoder')
+            ->encode([
+                'username' => $user->getUsername(),
+                'exp' => $this->getTokenExpiryDateTime(),
+            ]);
+	}
+ 
+	private function getTokenExpiryDateTime()
+	{
+	    $tokenTtl = $this->container->getParameter('lexik_jwt_authentication.token_ttl');
+	    $now = new \DateTime();
+	    $now->add(new \DateInterval('PT'.$tokenTtl.'S'));
+	 
+	    return $now->format('U');
+	}
 }
