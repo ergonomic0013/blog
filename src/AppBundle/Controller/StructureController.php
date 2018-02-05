@@ -20,6 +20,7 @@ class StructureController extends Controller
 		}
 
 		public function cddAction($newPath){
+			//тестовое задание в этом экшене
 			$currentPath = substr($this->currentPath, 1);
 			$dir = null;
 			$i = 0;

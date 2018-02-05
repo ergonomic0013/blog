@@ -17,8 +17,8 @@ use AppBundle\Listener\SuccessMsgListener;
 use AppBundle\BlogEvents;
 
 
-class UserController extends FOSRestController{
-    
+class UserController extends FOSRestController
+{    
         //http://blog/web/api/register?username=Ella&email=elina@gmail.com&password=1234567890&enabled=1&roles=USER
     public function registerAction(Request $request){
  
