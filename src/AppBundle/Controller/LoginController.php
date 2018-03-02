@@ -6,7 +6,7 @@ namespace AppBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\User as Users;	
+use AppBundle\Entity\User;	// as Users
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
@@ -17,15 +17,15 @@ class LoginController extends FOSRestController
     public function loginAction(Request $request)
     {
     	$userName = $request->getUser();
-    	$userPassword = $request->getPassword();
+    	$Password = $request->getPassword();
 
-    	$user = $this->getDoctrine()->getRepository(Users::class)->findOneBy(['username' => $userName]);
+    	$user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $userName]);
     	if(!$user){
     		throw $this->createNotFoundException();
     	}
 
-    	$isValid = $this->('sucurity.password_encoder')->isPasswordValid($user, $password);
-    	$if(!$isValid){
+    	$isValid = $this->get('sucurity.password_encoder')->isPasswordValid($user, $password);
+    	if(!$isValid){
     		throw new BadCredentialsException();
     	}
 

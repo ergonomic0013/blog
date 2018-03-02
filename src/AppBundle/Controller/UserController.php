@@ -11,7 +11,7 @@ namespace AppBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\View\View;
-use AppBundle\Entity\User as Users;
+use AppBundle\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use AppBundle\Listener\SuccessMsgListener;
 use AppBundle\BlogEvents;
@@ -60,7 +60,7 @@ class UserController extends FOSRestController
     }
 
     public function profileAction($id){
-        $users = $this->getDoctrine()->getRepository(Users::class)->find($id);
+        $users = $this->getDoctrine()->getRepository(User::class)->find($id);
         
         if ($users == null) {
             return new View('There are no users exist', Response::HTTP_NOT_FOUND);
